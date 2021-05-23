@@ -3,15 +3,11 @@ package com.revature;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.revature.pages.GlbHomepage;
@@ -19,8 +15,7 @@ import com.revature.pages.GlbLoginPage;
 import com.revature.pages.GlbSearchGamePage;
 import com.revature.pages.GlbSignupPage;
 
-public class Project2AutomationTest {
-	
+public class SignUpTest {
 	
 	private static WebDriver driver;
 	private static GlbLoginPage glbLoginPage;
@@ -52,54 +47,24 @@ public class Project2AutomationTest {
 		
 		String expected = "Project2".trim();
 		
-		
 		assertEquals(expected, glbHomepage.getTitle());
 		
 	}
 	
-//	@Test
-//	@Order(1)
-//	void test_title_10RecentGameReview() {
-//		String expected = "10 Newest Game Reviews".trim();
-//		String actual = glbHomepage.getTenRecentGameReviews();
-//		assertEquals(expected,actual);
-//	}
-	
-	
 	@Test
 	@Order(2)
-	void test_loginButtonClick() {
-		
-	
-		glbHomepage.clickLogin();
-		
-		String expected = "Username".trim();
-		String actual = glbLoginPage.getUsernameText();
-		
-		assertEquals(expected, actual);
-	}
-	
-	
-	
-	@Test
-	@Order(4)
-	void test_signupButtonClick() {
-	
+	void test_valid_signup() {
 		glbHomepage.clickSignup();
+		glbSignupPage.typeUsername("wertwert15001");
+		glbSignupPage.typeFirstName("phil");
+		glbSignupPage.typeLastName("jenkins");
+		glbSignupPage.typeEmail("jenkins111323@gmail.com");
+		glbSignupPage.typePassword("jenkins");
+		glbSignupPage.typeConfirm("jenkins");
+		glbSignupPage.submitClick();
 		
-		String expected = "Username".trim();
-		String actual = glbSignupPage.getUsernameText();
-		
-		assertEquals(expected, actual);
-	}
-	
-	@Test
-	@Order(5)
-	void test_searchGameButtonClick() {
-		glbHomepage.clickSearchGame();
-		
-		String expected = "Search Game".trim();
-		String actual = glbSearchGamePage.getSearchGameText();
+		String expected = "Username";
+		String actual = glbLoginPage.getUsernameText();
 		assertEquals(expected, actual);
 		
 	}
